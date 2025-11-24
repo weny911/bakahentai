@@ -151,7 +151,54 @@
         <h1>🌸小咪祝您早上好！🌸</h1>
     </div>
     
+    <button id="musicBtn" style="
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 100;
+        padding: 15px 30px;
+        font-size: 24px;
+        background: linear-gradient(45deg, #ff0000, #ff00ff);
+        color: white;
+        border: 3px solid gold;
+        border-radius: 50px;
+        cursor: pointer;
+        font-weight: bold;
+        box-shadow: 0 0 20px #ff0000;
+        animation: btnPulse 1s infinite;
+    ">🎵 点我播放音乐</button>
+    
+    <audio id="bgMusic" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+    
+    <style>
+        @keyframes btnPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+    </style>
+    
     <script>
+        // 音乐播放控制
+        const musicBtn = document.getElementById('musicBtn');
+        const bgMusic = document.getElementById('bgMusic');
+        let isPlaying = false;
+        
+        musicBtn.addEventListener('click', function() {
+            if (!isPlaying) {
+                bgMusic.play();
+                musicBtn.textContent = '🔊 音乐播放中';
+                musicBtn.style.background = 'linear-gradient(45deg, #00ff00, #00ffff)';
+                isPlaying = true;
+            } else {
+                bgMusic.pause();
+                musicBtn.textContent = '🎵 点我播放音乐';
+                musicBtn.style.background = 'linear-gradient(45deg, #ff0000, #ff00ff)';
+                isPlaying = false;
+            }
+        });
+        
         // 创建烟火效果
         function createFirework() {
             const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff', '#ffffff'];
